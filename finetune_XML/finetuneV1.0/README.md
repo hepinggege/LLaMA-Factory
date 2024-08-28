@@ -1,0 +1,8 @@
+采用了llama factory框架进行微调，采用accelerate库进行多卡分布式训练。
+部署好llama factory后，配置好相关环境（可以参考llama factory_config.sh）。
+通过"accelerate config"指令生成accelerate配置文件default_config.yaml。
+在文件qwen1.5_lora_sft.yaml中设置训练的各项超参数。
+运行run_train_bash.sh开始微调，运行merge_bash.sh把微调完的模型与原模型合并。
+如果需要采用deepspeed zero,可以在default_config.yaml中设置启用deepspeed zero（accelerate库支持deepspeed zero）
+并指定deepspeed zero配置文件（在qwen1.5_lora_sft.yaml中指定），配置文件参考ds_z3_offload_config.json。
+微调后进行inference的脚本调用了transformers库。
